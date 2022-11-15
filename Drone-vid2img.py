@@ -6,19 +6,18 @@ import time
 
 t1=time.process_time()
 
-sourceDirectory = './VisiFireDataset'
-targetDirectory = './FireSegmentationDataset'
+sourceDirectory = 'path'
+targetDirectory = 'path'
 
 
-# From
-# A. E. Çetin. “Computer Vision Based Fire Detection Dataset.” 2014. http://signal.ee.bilkent.edu.tr/VisiFire/.
+
 datasetLink = {
-    'Video01':'http://signal.ee.bilkent.edu.tr/VisiFire/Demo/FireClips/controlled1.avi', 
+    'Video01':'http://', 
 
 }
 
 datasetFile = {
-    'Video01':'controlled1.avi', 
+    'Video01':'.avi', 
 
 }
 
@@ -28,7 +27,7 @@ datasetFPS = {
 }
 
 def downloadFireData():
-    print("Downloading Visi Fire Dataset.")
+    print("Downloading  Dataset.")
 
     directory = sourceDirectory+"/"
     if not os.path.exists(directory):
