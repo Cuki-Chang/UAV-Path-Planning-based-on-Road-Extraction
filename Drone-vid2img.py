@@ -26,7 +26,7 @@ datasetFPS = {
 
 }
 
-def downloadFireData():
+def downloadData():
     print("Downloading  Dataset.")
 
     directory = sourceDirectory+"/"
@@ -88,7 +88,7 @@ def extractData():
 
 if __name__ == '__main__':
     t1 = time.process_time()
-    if(downloadFireData()==-1):
+    if(downloadData()==-1):
         exit()
     if(checkDir()==-1):
         exit()
