@@ -12,7 +12,8 @@ BURNT = (0, 0, 0)      # 3
 
 class Scenes():
     def __init__(self,img_path,p,n):
-        self.scenes = cv2.imread(img_path,cv2.IMREAD_GRAYSCALE) # scene with 2-D array 
+        self.scenes = cv2.imread(img_path,cv2.IMREAD_GRAYSCALE) # scene with 2-D array
+        assert self.scenes is not None, "image is invalid or does not exist!"
         self.h, self.w = self.scenes.shape
         self.p = p # probability of adjacent trees can burn
         self.scenes[self.scenes == 0] = 1  # FOREST
@@ -91,7 +92,7 @@ class Scenes():
     def update(self):
         self.step()
 
-    def save(self):
+    def save(self, filepath):
         r_channel = np.zeros_like(self.scenes)
         g_channel = np.zeros_like(self.scenes)
         b_channel = np.zeros_like(self.scenes)
@@ -104,12 +105,22 @@ class Scenes():
         # merge the color channels to create the RGB image
         rgb_img = cv2.merge((b_channel, g_channel, r_channel))
 
-        cv2.imwrite('sim_res.jpg',rgb_img)
+        cv2.imwrite(filepath,rgb_img)
+    def play(self, num_steps=None):
+        if num_steps is None:
+            while not scenes.is_over():
+                scenes.step()
+        elif isinstance(num_steps, int):
+            for i in range(num_steps):
+                if not scenes.is_over():
+                    scenes.step()
+        else:
+            print("number of steps should be posivite integer or None")
+            
 
 
-scenes = Scenes('./images/356636_mask.png', p=0.4, n=10) # Binary Mask from Road Extraction
-# while not scenes.is_over():
-for i in range(20):
-    scenes.step()
 
-scenes.save()
+scenes = Scenes('./example.png', p=0.4, n=10) # Binary Mask from Road Extraction
+scenes.play(num_steps= 3)
+
+scenes.save(filepath = 'sim_res.jpg')
