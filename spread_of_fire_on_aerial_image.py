@@ -1,14 +1,6 @@
 import cv2
 import numpy as np
 
-# Define display (R, G, B)
-ROAD = (255, 255, 255) # 0
-FOREST = (128, 128, 128)   # 1
-FIRE = (255, 0, 0)     # 2
-# SMOKE = (128, 128, 128)
-BURNT = (0, 0, 0)      # 3
-
-
 
 class Scenes():
     def __init__(self,img_path,p,n):
@@ -118,9 +110,15 @@ class Scenes():
             print("number of steps should be posivite integer or None")
             
 
-
-
-scenes = Scenes('./example.png', p=0.4, n=10) # Binary Mask from Road Extraction
-scenes.play(num_steps= 3)
-
-scenes.save(filepath = 'sim_res.jpg')
+if __name__ == '__main__':
+    # Define display (R, G, B)
+    ROAD = (255, 255, 255) # 0
+    FOREST = (128, 128, 128)   # 1
+    FIRE = (255, 0, 0)     # 2
+    # SMOKE = (128, 128, 128)
+    BURNT = (0, 0, 0)      # 3
+    
+    scenes = Scenes('./example.png', p=0.4, n=10) # Binary Mask from Road Extraction
+    scenes.play(num_steps= 100)
+    
+    scenes.save(filepath = 'sim_res.jpg')
